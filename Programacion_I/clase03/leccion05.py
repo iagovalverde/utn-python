@@ -93,20 +93,3 @@ print(lista_productos)
 
 
 #Recorrer la lista y mostrar los elementos
-
-lista_productos = []
-CANTIDAD = 3
-for i in range(CANTIDAD):
-    codigo = int(input("Ingrese el codigo: "))
-    descripcion = input("Ingrese descripcion: ")
-    precio = float(input("Ingrese el precio: "))
-    un_producto = {}
-    un_producto["codigo"] = codigo
-    un_producto["descripcion"] = descripcion
-    un_producto["precio"] = precio
-    lista_productos.append(un_producto)
-
-    for producto in lista_productos:
-        print(f"{producto['codigo']}--{producto['descripcion']}--{producto['precio']}")
-
-print(lista_productos)

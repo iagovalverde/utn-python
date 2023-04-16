@@ -1,5 +1,6 @@
 # LISTAS # 
 # # se accede a sus elementos por su indice
+# se usa []
 
 # mi_lista = []
 # print(type(mi_lista))
@@ -42,6 +43,7 @@ for i in range(3):
 
 # DICCIONARIOS # 
 # se accede a sus elementos por su clave
+# se usa {}
 
 mi_diccionario = {1: "marina", "apellido": ["cardozo", "pagura"]}
 print(mi_diccionario['apellido'])
@@ -60,6 +62,7 @@ print(mi_diccionario)
 
 # TUPLAS #
 # es inmutable
+# se usa ()
 
 mi_tupla = (1, '2', True)
 print(mi_tupla)

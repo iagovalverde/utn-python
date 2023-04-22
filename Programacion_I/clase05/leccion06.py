@@ -41,7 +41,7 @@ resultado_resta = restar_numeros()
 print(f"El resultado de la resta es: {resultado_resta}")
 
 multiplicar_numeros(5,9) # Parametros actuales
-x = int(input("Ingrse un numero: "))
+x = int(input("Ingrese un numero: "))
 y = int(input("Ingrese otro numero: "))
 
 multiplicar_numeros(x,y)

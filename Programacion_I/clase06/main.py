@@ -106,6 +106,15 @@ while True:
         case 6:
             break
 
+
+
+
+
+
+
+
+
+
 # print(type(lista_bzrp))
 # print(type(lista_bzrp[0]))
 

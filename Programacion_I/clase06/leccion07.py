@@ -28,7 +28,7 @@ def mostrar_lista_temas_views():
 
 def calcular_maximo(lista:list, clave:str)->int:
     '''
-    Brief: Calcula el maximo calor numerico en base a una clave
+    Brief: Calcula el maximo valor numerico en base a una clave
     Parameters:
         lista: list -> lista sobre la que voy a hacer la busqueda
         clave: str -> la clave con la cual realizo la busqueda en la lista

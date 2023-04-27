@@ -76,9 +76,21 @@ def url(tema:dict):
     codigo = url[indice+1:]
     print(codigo)
 
+# 'date': '2022-07-06 00:00:00'
+def formatear_fecha(fecha_cadena:str):
+    fecha_split = fecha_cadena.split(" ")
+    fecha = fecha_split[0].split("-")
+    año = fecha[0]
+    mes = fecha[1]
+    dia = fecha[2]
+    separador = "/"
+    fecha_formato = separador.join([dia,mes,año]) 
+    return fecha_formato
+
 def test(lista:list):
     for tema in lista:
-        url(tema)
+        fecha = formatear_fecha(tema['date'])
+        print(fecha)
 
 
 

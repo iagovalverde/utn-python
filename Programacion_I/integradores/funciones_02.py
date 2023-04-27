@@ -5,6 +5,7 @@ Div - 1D
 '''
 
 from data_stark import lista_personajes
+from os import system
 
 ## 0.0 
 def stark_normalizar_datos(lista:list, clave:str):
@@ -44,9 +45,9 @@ def stark_imprimir_nombres_heroes(lista:list):
             imprimir_dato(nombre)
 
 ## 2
-def obtener_nombre_y_dato(diccionario_nombre:dict, clave):
-    if clave in diccionario_nombre:
-        nombre_y_dato = f"Nombre: {diccionario_nombre['nombre']} | {clave}: {diccionario_nombre[clave]}"
+def obtener_nombre_y_dato(diccionario:dict, clave):
+    if clave in diccionario:
+        nombre_y_dato = f"Nombre: {diccionario['nombre']} | {clave}: {diccionario[clave]}"
         return nombre_y_dato
 
 ## 3
@@ -61,29 +62,50 @@ def stark_imprimir_nombres_alturas(lista:list, clave):
 ## 4.1 
 def calcular_max(lista:list, dato:str):
     flag_maximo = True
+    stark_normalizar_datos(lista, dato)
     for elemento in lista:
-        if flag_maximo == True or elemento[dato] > dato:
-            elemento[dato] = dato
+        if flag_maximo == True or elemento[dato] > dato_maximo:
+            dato_maximo = elemento[dato]
             flag_maximo = False
-    return elemento[dato]
+    return dato_maximo
 
 ## 4.2
 def calcular_min(lista:list, dato:str):
     flag_minimo = True
+    stark_normalizar_datos(lista, dato)
     for elemento in lista:
-        if flag_minimo == True or elemento[dato] < dato:
-            elemento[dato] = dato
+        if flag_minimo == True or elemento[dato] < dato_minimo:
+            dato_minimo = elemento[dato]
             flag_minimo = False
-        return elemento[dato]
+    return dato_minimo
 
-## 4.3 esta MAL
+## 4.3 
 def calcular_max_min_dato(lista:list, tipo_calculo:str, dato:str):
-    if tipo_calculo == 'maximo':
-        nombre_elemento = calcular_max(lista, dato)
-    else:
-        if tipo_calculo == 'minimo':
-            nombre_elemento = calcular_min(lista, dato)
-    print(nombre_elemento)        
-    return nombre_elemento
+    for elemento in lista:
+        if tipo_calculo == 'maximo':
+            valor_calculado = calcular_max(lista, dato) 
+            if elemento[dato] == valor_calculado:
+                return elemento['nombre']
+        else:
+            if tipo_calculo == 'minimo':
+                valor_calculado = calcular_min(lista, dato)
+                if elemento[dato] == valor_calculado:
+                    return elemento['nombre']
 
-calcular_max_min_dato(lista_personajes, 'maximo', 'altura')
+calcular_max_min_dato(lista_personajes, 'maximo', 'peso')
+
+# 4.4
+def stark_calcular_imprimir_heroe(lista:list, tipo_calculo:str, dato:str):
+    diccionario_elementos = {}
+    if len(lista) == 0:
+        return -1
+    nombre_elemento = calcular_max_min_dato(lista, tipo_calculo, dato)
+    
+    if tipo_calculo == 'maximo':
+        nombre_y_dato = obtener_nombre_y_dato(diccionario_elementos, dato)
+        imprimir_dato(f"Mayor {dato}: {nombre_y_dato}")
+
+stark_calcular_imprimir_heroe(lista_personajes, 'maximo', 'altura')
+
+
+

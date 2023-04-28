@@ -85,27 +85,114 @@ def calcular_max_min_dato(lista:list, tipo_calculo:str, dato:str):
         if tipo_calculo == 'maximo':
             valor_calculado = calcular_max(lista, dato) 
             if elemento[dato] == valor_calculado:
-                return elemento['nombre']
+                return elemento
         else:
             if tipo_calculo == 'minimo':
                 valor_calculado = calcular_min(lista, dato)
                 if elemento[dato] == valor_calculado:
-                    return elemento['nombre']
+                    return elemento
 
 calcular_max_min_dato(lista_personajes, 'maximo', 'peso')
 
-# 4.4
+# 4.4 INCOMPLETO
 def stark_calcular_imprimir_heroe(lista:list, tipo_calculo:str, dato:str):
-    diccionario_elementos = {}
     if len(lista) == 0:
         return -1
-    nombre_elemento = calcular_max_min_dato(lista, tipo_calculo, dato)
+    elemento_retornado = calcular_max_min_dato(lista, tipo_calculo, dato)
+    for elemento in lista:
+        if elemento == elemento_retornado:
+            if tipo_calculo == 'maximo':
+                nombre_y_dato = obtener_nombre_y_dato(elemento_retornado, dato)
+                imprimir_dato(f"Mayor {dato}: {nombre_y_dato}")
+            else:
+                if tipo_calculo == 'minimo':
+                    nombre_y_dato = obtener_nombre_y_dato(elemento_retornado, dato)
+                    imprimir_dato(f"Menor {dato}: {nombre_y_dato}")
+
+
+stark_calcular_imprimir_heroe(lista_personajes, 'menor', 'altura')
+
+# 5.1
+def sumar_dato_heroe(lista:list, dato:str):
+    suma = 0
+    stark_normalizar_datos(lista, dato)
+    for elemento in lista:
+        if isinstance(elemento, dict) and elemento[dato] is not None:
+            suma += elemento[dato]
+    return suma
+
+# 5.2
+def dividir(dividendo:float, divisor:int):
+    if divisor == 0:
+        return 0
+    else:
+        resultado_division = dividendo / divisor
+    return resultado_division
+
+# 5.3
+def calcular_promedio(lista:list, dato:str):
+    cantidad_elementos = len(lista_personajes)
+    resultado_suma = sumar_dato_heroe(lista, dato)
+    if cantidad_elementos > 0:
+        promedio = dividir(resultado_suma, cantidad_elementos)
+    else:
+        promedio = 0
+    return promedio
+
+# 5.4
+def stark_calcular_imprimir_promedio_altura(lista:list):
+    if len(lista) == 0:
+        return -1
     
-    if tipo_calculo == 'maximo':
-        nombre_y_dato = obtener_nombre_y_dato(diccionario_elementos, dato)
-        imprimir_dato(f"Mayor {dato}: {nombre_y_dato}")
+    suma_altura = sumar_dato_heroe(lista, 'altura')
+    resultado_promedio = calcular_promedio(lista, 'altura')
+    imprimir_dato(resultado_promedio)
 
-stark_calcular_imprimir_heroe(lista_personajes, 'maximo', 'altura')
+# stark_calcular_imprimir_promedio_altura(lista_personajes)
+
+# 6.1
+def imprimir_menu():
+    imprimir_dato("1. Mostrar nombre de los heroes" 
+                f"\n2. Mostrar nombre y altura de los heroes"
+                f"\n3. Mostrar altura maxima entre los heroes"
+                f"\n4. Mostrar altura minima entre los heroes"
+                f"\n6. Mostrar nombre del heroe más alto y del más bajo"
+                f"\n7. Calcular peso máximo y minimo de los heroes"
+                f"\n8. Salir"
+)
+
+# 6.2
+def validar_entero(numero:str):
+    return numero.isdigit()
+
+# 6.3
+def stark_menu_principal():
+    while True:
+        imprimir_menu()
+        respuesta = input("Ingrese una opcion:")
+        if validar_entero(respuesta) == True:
+            respuesta = int(respuesta)
+            return respuesta
+        else:
+            return -1
+        break
+
+# 7
+def stark_marvel_app(lista:list):
+    opcion_elegida = stark_menu_principal()
+    match opcion_elegida:
+        case 1:
+            stark_imprimir_nombres_heroes(lista_personajes)
+        case 2:
+            stark_imprimir_nombres_alturas(lista_personajes, 'altura')
+        case 3:
+            stark_calcular_imprimir_heroe(lista_personajes, )
+        case 4:
+            pass
+        case 5:
+            stark_calcular_imprimir_promedio_altura(lista_personajes)
+        case 6:
+            pass
 
 
-
+stark_marvel_app(lista_personajes)

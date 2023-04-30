@@ -4,9 +4,6 @@ Nombre: Iago Valverde Pachiani
 Div - 1D
 '''
 
-from data_stark import lista_personajes
-from os import system
-
 ## 0.0 
 def stark_normalizar_datos(lista:list, clave:str):
     datos_normalizados = False
@@ -92,9 +89,7 @@ def calcular_max_min_dato(lista:list, tipo_calculo:str, dato:str):
                 if elemento[dato] == valor_calculado:
                     return elemento
 
-calcular_max_min_dato(lista_personajes, 'maximo', 'peso')
-
-# 4.4 INCOMPLETO
+# 4.4 
 def stark_calcular_imprimir_heroe(lista:list, tipo_calculo:str, dato:str):
     if len(lista) == 0:
         return -1
@@ -108,9 +103,6 @@ def stark_calcular_imprimir_heroe(lista:list, tipo_calculo:str, dato:str):
                 if tipo_calculo == 'minimo':
                     nombre_y_dato = obtener_nombre_y_dato(elemento_retornado, dato)
                     imprimir_dato(f"Menor {dato}: {nombre_y_dato}")
-
-
-stark_calcular_imprimir_heroe(lista_personajes, 'menor', 'altura')
 
 # 5.1
 def sumar_dato_heroe(lista:list, dato:str):
@@ -131,7 +123,7 @@ def dividir(dividendo:float, divisor:int):
 
 # 5.3
 def calcular_promedio(lista:list, dato:str):
-    cantidad_elementos = len(lista_personajes)
+    cantidad_elementos = len(lista)
     resultado_suma = sumar_dato_heroe(lista, dato)
     if cantidad_elementos > 0:
         promedio = dividir(resultado_suma, cantidad_elementos)
@@ -146,9 +138,7 @@ def stark_calcular_imprimir_promedio_altura(lista:list):
     
     suma_altura = sumar_dato_heroe(lista, 'altura')
     resultado_promedio = calcular_promedio(lista, 'altura')
-    imprimir_dato(resultado_promedio)
-
-# stark_calcular_imprimir_promedio_altura(lista_personajes)
+    imprimir_dato(f"El promedio de altura entre los heroes: {resultado_promedio}")
 
 # 6.1
 def imprimir_menu():
@@ -156,6 +146,7 @@ def imprimir_menu():
                 f"\n2. Mostrar nombre y altura de los heroes"
                 f"\n3. Mostrar altura maxima entre los heroes"
                 f"\n4. Mostrar altura minima entre los heroes"
+                f"\n5. Calcular promedio de las alturas"
                 f"\n6. Mostrar nombre del heroe más alto y del más bajo"
                 f"\n7. Calcular peso máximo y minimo de los heroes"
                 f"\n8. Salir"
@@ -167,32 +158,36 @@ def validar_entero(numero:str):
 
 # 6.3
 def stark_menu_principal():
-    while True:
-        imprimir_menu()
-        respuesta = input("Ingrese una opcion:")
-        if validar_entero(respuesta) == True:
-            respuesta = int(respuesta)
-            return respuesta
-        else:
-            return -1
-        break
+    imprimir_menu()
+    respuesta = input("Ingrese una opcion:")
+    if validar_entero(respuesta) == True:
+        respuesta = int(respuesta)
+        return respuesta
+    else:
+        return -1
 
 # 7
 def stark_marvel_app(lista:list):
-    opcion_elegida = stark_menu_principal()
-    match opcion_elegida:
-        case 1:
-            stark_imprimir_nombres_heroes(lista_personajes)
-        case 2:
-            stark_imprimir_nombres_alturas(lista_personajes, 'altura')
-        case 3:
-            stark_calcular_imprimir_heroe(lista_personajes, )
-        case 4:
-            pass
-        case 5:
-            stark_calcular_imprimir_promedio_altura(lista_personajes)
-        case 6:
-            pass
-
-
-stark_marvel_app(lista_personajes)
+    while True:
+        opcion_elegida = stark_menu_principal()
+        match opcion_elegida:
+            case 1:
+                stark_imprimir_nombres_heroes(lista)
+            case 2:
+                stark_imprimir_nombres_alturas(lista, 'altura')
+            case 3:
+                stark_calcular_imprimir_heroe(lista, 'maximo', 'altura')
+            case 4:
+                stark_calcular_imprimir_heroe(lista, 'minimo', 'altura')
+            case 5:
+                stark_calcular_imprimir_promedio_altura(lista)
+            case 6:
+                stark_calcular_imprimir_heroe(lista, 'maximo', 'altura')
+                stark_calcular_imprimir_heroe(lista, 'minimo', 'altura')
+            case 7:
+                stark_calcular_imprimir_heroe(lista, 'maximo', 'peso')
+                stark_calcular_imprimir_heroe(lista, 'minimo', 'peso')
+            case 8:
+                break
+            case _:
+                print("[ERROR] Opcion incorrecta.")

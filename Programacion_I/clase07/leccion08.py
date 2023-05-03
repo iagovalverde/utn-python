@@ -37,7 +37,7 @@ print(mi_cadena)
 mi_cadena = mi_cadena.replace("mundo", "zzz")
 print(mi_cadena)
 
-# metodo split
+# metodo split -> divide una cadena en una lista donde cada palabra es un elemento de la lista
 mi_cadena = "Python, Java, JavaScript, C#"
 lista_split = mi_cadena.split(",")#"," -> caracter delimitador
 print(lista_split)

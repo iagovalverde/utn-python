@@ -184,7 +184,7 @@ def generar_indice_nombres(lista_heroes:list):
         if sanitizado == True:
             print("Datos normalizados")
 
-generar_indice_nombres(lista_personajes)
+
 
 # 4.1
 def generar_indice_nombres(lista_heroes:list):
@@ -195,8 +195,7 @@ def generar_indice_nombres(lista_heroes:list):
         if not isinstance(heroe, dict) or 'nombre' not in heroe:
             print("El origen de datos no contiene el formato correcto")
     
-        nombre = (heroe['nombre'])
-        nombre_split = re.split(" |-", nombre)
+        nombre_split = re.split(" |-", heroe['nombre'])
         lista_split += nombre_split
     return lista_split
 
@@ -204,8 +203,86 @@ def generar_indice_nombres(lista_heroes:list):
 def stark_imprimir_indice_nombre(lista_heroes:list):
     nombres_split = generar_indice_nombres(lista_heroes)
     nombres_split = str(nombres_split)
-    #print(nombres_split)
+    nombres_split = re.sub("\['|'\]", "", nombres_split)
     print(re.sub("', '", "-", nombres_split))
+
+
+# 5.1
+def convertir_cm_a_mtrs(valor_cm:float):
+    if not isinstance(valor_cm, float) or valor_cm < 0:
+        return -1
+    
+    valor_mtrs = valor_cm / 100
+
+    return valor_mtrs
+
+# 5.2
+def generar_separador(patron:str, largo:int, imprimir:bool = True):
+    if not isinstance(patron, str) or len(patron) < 1 or len(patron) > 2:
+        return "N/A"
+    if not isinstance(largo, int) or largo < 1 or largo > 235:
+        return "N/A"
+    
+    separador = patron * largo
+    if imprimir == True:
+        print(separador)
+    else:
+        return separador
+
+generar_separador('*',10)
+
+# 5.3 
+def generar_encabezado(titulo:str):
+    largo_separador = 100
+    separador = '*' * largo_separador
+    titulo_mayuscula = titulo.upper()
+    encabezado = f"{separador}\n{titulo_mayuscula}\n{separador}"
+
+    return encabezado
+
+# 5.4
+def imprimir_ficha_heroe(heroe:dict):
+    titulo_principal = generar_encabezado('principal')
+    titulo_fisico = generar_encabezado('fisico')
+    titulo_señas_particulares = generar_encabezado('señas particulares')
+
+    nombre: stark_imprimir_nombres_con_iniciales(heroe)
     
 
-stark_imprimir_indice_nombre(lista_personajes)
+    ficha_heroe = (f"{titulo_principal}\nNOMBRE DEL HÉROE: {heroe['nombre']}")
+    
+    # f"\nIDENTIDAD SECRETA: {heroe['identidad']}"
+    # f"\nCONSULTORA: {heroe['empresa']}"
+    # #f"\nCÓDIGO DE HÉROE: {heroe}" #######
+    # f"\n{titulo_fisico}"
+    # f"\nALTURA: {heroe['altura']}"
+    # f"\nPESO: {heroe['peso']}"
+    # f"\nFUERZA: {heroe['fuerza']}"
+    # f"\n{titulo_señas_particulares}"
+    # f"\nCOLOR DE OJOS: {heroe['color_ojos']}"
+    # f"\nCOLOR DE PELO: {heroe['color_pelo']}"
+
+    print(ficha_heroe)
+
+imprimir_ficha_heroe()
+
+# 5.5
+def stark_navegar_fichas(lista_heroes:list):
+    posicion = 1
+
+    while True:
+        ficha = imprimir_ficha_heroe(lista_heroes[posicion])
+        print(ficha)
+
+        opcion = int(input("[1] Ir a la izquierda [2] Ir a la derecha [S] Salir"))
+        match opcion:
+            case 1:
+                posicion = (posicion - 1)
+            case 2: 
+                posicion = (posicion + 1)
+            case 3:
+                break
+            case _: 
+                pass
+
+#stark_navegar_fichas(lista_personajes)
